@@ -5,6 +5,8 @@ import TaskList from './components/TaskList';
 import Tasks from './components/Tasks';
 
 function App() {
+  const [tasks] = useState([]);
+
   return (
     <div className="App">
       <header className="App-header">
