@@ -1,27 +1,33 @@
 import React, {useState} from 'react';
 import '../styles/TaskForm.scss'
 
-export default function TaskForm() {
-    const [tasks, setTask] = useState({item: ""})
+export default function TaskForm({addTask}) {
+    const [tasks, setTask] = useState({item: "", id: ""})
 
-    function taskSubmitted(e) {
+    function taskTyped(e) {
         setTask({...tasks, item: e.target.value});
     }
 
+    const task = tasks.item
+
     function taskAdded(e) {
+        const taskItem =[]
         e.preventDefault();
-        console.log(tasks.item)
-        if (tasks.item) {
+        if (task) {
+            taskItem.push(tasks)
+            taskItem.forEach((item, i) => {
+                item.id = i +1
+            })
+            console.log(taskItem)
             setTask({...tasks, item: ""})
-            // console.log(setTask({...tasks, item: ""}))
+            addTask({...tasks, id: ""})
         }
-        // setTask({...tasks, task: ""})
     }
 
     return (
         <form className="task" onSubmit={taskAdded}>
-            <input className="task-input" value={tasks.item} onChange={taskSubmitted}/>
-            <button className="task-submitButton"/>
+            <input className="task-input" value={task} onChange={taskTyped}/>
+            <button className="task-submitButton">Submit</button>
         </form>
     )
 }

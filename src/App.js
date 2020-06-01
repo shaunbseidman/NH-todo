@@ -5,14 +5,17 @@ import TaskList from './components/TaskList';
 import Tasks from './components/Tasks';
 
 function App() {
-  const [tasks] = useState([]);
+  const [tasks, setTask] = useState([]);
+
+  function addTask(task) {
+    setTask([task, ...tasks])
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <Tasks />
-        <TaskForm />
-        <TaskList />
+        <TaskForm addTask={addTask} />
+        <TaskList tasks={tasks}/>
       </header>
     </div>
   );

@@ -1,12 +1,18 @@
 import React from 'react';
+import Tasks from './Tasks';
 import '../styles/TaskList.scss'
 
-export default function TaskList() {
+export default function TaskList({tasks}) {
   return (
     <div>
-        <li className="TaskList">
-            Task List Goes Here
-        </li>
+        <ul className="TaskList">
+            {tasks.map(task => (
+                <Tasks
+                key={task.id}
+                task={task}
+                />
+            ))}
+        </ul>
     </div>
   );
 }
