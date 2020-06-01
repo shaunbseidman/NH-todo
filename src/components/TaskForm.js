@@ -3,14 +3,23 @@ import '../styles/TaskForm.scss'
 
 export default function TaskForm() {
     const [tasks, setTask] = useState({item: ""})
-    console.log(tasks)
 
     function taskSubmitted(e) {
-        console.log(setTask({...tasks, item: e.target.value}))
+        setTask({...tasks, item: e.target.value});
+    }
+
+    function taskAdded(e) {
+        e.preventDefault();
+        console.log(tasks.item)
+        if (tasks.item) {
+            setTask({...tasks, item: ""})
+            // console.log(setTask({...tasks, item: ""}))
+        }
+        // setTask({...tasks, task: ""})
     }
 
     return (
-        <form className="task">
+        <form className="task" onSubmit={taskAdded}>
             <input className="task-input" value={tasks.item} onChange={taskSubmitted}/>
             <button className="task-submitButton"/>
         </form>
