@@ -15,10 +15,9 @@ export default function TaskForm({addTask}) {
         e.preventDefault();
         if (task) {
             taskItem.push(tasks)
-            taskItem.forEach((item, i) => {
-                item.id = i +1
+            taskItem.forEach((item) => {
+                item.id = Math.floor(Math.random() * 100) + 1;
             })
-            console.log(taskItem)
             setTask({...tasks, item: ""})
             addTask({...tasks, id: ""})
         }
