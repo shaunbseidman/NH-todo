@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import '../styles/TaskForm.scss'
 
 export default function TaskForm({addTask}) {
-    const [tasks, setTask] = useState({item: "", id: ""})
+    const [tasks, setTask] = useState({item: "", id: "", completed: false})
 
     function taskTyped(e) {
         setTask({...tasks, item: e.target.value});

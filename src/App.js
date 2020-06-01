@@ -20,14 +20,29 @@ function App() {
   }, [tasks]);
 
   function addTask(task) {
+    console.log(task)
     setTask([task, ...tasks])
+  }
+
+  function completeTask(id) {
+    setTask (
+      tasks.map(task => {
+        if (task.id === id) {
+          return {
+            ...task,
+            completed: !task.completed
+          };
+        }
+        return task
+      })
+    );
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <TaskForm addTask={addTask} />
-        <TaskList tasks={tasks}/>
+        <TaskList tasks={tasks} completeTask={completeTask}/>
       </header>
     </div>
   );
