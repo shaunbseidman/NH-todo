@@ -1,11 +1,12 @@
 import React from 'react';
 import Tasks from './Tasks';
 import '../styles/TaskList.scss'
+import { List } from "@material-ui/core";
 
 export default function TaskList({tasks, completeTask, removeTask}) {
   return (
     <div>
-        <ul className="TaskList">
+        <List className="TaskList">
             {tasks.map(task => (
                 <Tasks
                 key={task.id}
@@ -14,7 +15,7 @@ export default function TaskList({tasks, completeTask, removeTask}) {
                 completeTask={completeTask}
                 />
             ))}
-        </ul>
+        </List>
     </div>
   );
 }

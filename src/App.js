@@ -1,11 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import TaskForm from './components/TaskForm';
+import SearchForm from './components/SearchForm';
 import TaskList from './components/TaskList';
+import Typography from "@material-ui/core/Typography";
+import {makeStyles} from '@material-ui/core/styles';
 
 const localTask = "task-list-items";
 
+const useStyles = makeStyles({
+  header: {
+      padding: '16px',
+  },
+});
+
 function App() {
+  const classes = useStyles();
   const [tasks, setTask] = useState([]);
 
   useEffect(() => {
@@ -43,12 +53,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <TaskForm addTask={addTask} />
+      <Typography className={classes.header} variant="h2">
+        Tasks
+        <SearchForm/>
         <TaskList tasks={tasks}
         removeTask={removeTask}
         completeTask={completeTask}/>
-      </header>
+        <TaskForm addTask={addTask} />
+        </Typography>
     </div>
   );
 }

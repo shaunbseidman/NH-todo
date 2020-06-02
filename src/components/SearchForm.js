@@ -1,20 +1,21 @@
 import React, {useState} from 'react';
-import '../styles/TaskForm.scss'
+import '../styles/SearchForm.scss'
 import { Button, TextField } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import {APP_COLORS} from './Styles'
 
 const useStyles = makeStyles({
-    taskForm: {
+    searchForm: {
         width: '50%',
         margin: '0 auto',
     },
-    submitButton: {
+    searchButton: {
         backgroundColor: APP_COLORS.orchid20,
     },
   });
 
-export default function SearchForm({addTask}) {
+
+export default function TaskForm({addTask}) {
     const [tasks, setTask] = useState({item: "", id: "", completed: false})
     const classes = useStyles();
 
@@ -47,9 +48,9 @@ export default function SearchForm({addTask}) {
     }
 
     return (
-        <form className={classes.taskForm} onSubmit={taskAdded}>
+        <form className={classes.searchForm} onSubmit={taskAdded}>
             <TextField variant="outlined" className="task-input" value={task} key={task.id} type="text" name="task" onChange={taskTyped}/>
-            <Button type="submit" className={classes.submitButton}>Submit New Task</Button>
+            <Button type="submit" className={classes.searchButton}>Search Tasks</Button>
         </form>
     )
 }
