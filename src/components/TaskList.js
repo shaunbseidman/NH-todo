@@ -2,7 +2,7 @@ import React from 'react';
 import Tasks from './Tasks';
 import '../styles/TaskList.scss'
 
-export default function TaskList({tasks, completeTask}) {
+export default function TaskList({tasks, completeTask, removeTask}) {
   return (
     <div>
         <ul className="TaskList">
@@ -10,6 +10,7 @@ export default function TaskList({tasks, completeTask}) {
                 <Tasks
                 key={task.id}
                 task={task}
+                removeTask={removeTask}
                 completeTask={completeTask}
                 />
             ))}

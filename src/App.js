@@ -20,8 +20,11 @@ function App() {
   }, [tasks]);
 
   function addTask(task) {
-    console.log(task)
     setTask([task, ...tasks])
+  }
+
+  function removeTask(id) {
+    setTask(tasks.filter(task => task.id !== id));
   }
 
   function completeTask(id) {
@@ -42,7 +45,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <TaskForm addTask={addTask} />
-        <TaskList tasks={tasks} completeTask={completeTask}/>
+        <TaskList tasks={tasks}
+        removeTask={removeTask}
+        completeTask={completeTask}/>
       </header>
     </div>
   );

@@ -1,19 +1,29 @@
 import React from 'react';
 import '../styles/Tasks.scss'
+import styled from 'styled-components'
 
-export default function Tasks({task, completeTask}) {
+const ListItem = styled.li`
+    color: red;
+ }
+
+`
+
+export default function Tasks({task, completeTask, removeTask}) {
     function taskCompleted () {
         completeTask(task.id)
-        console.log(task.id, 'done')
     }
+
+    function taskRemoved () {
+        removeTask(task.id)
+    }
+
   return (
     <div>
         <input onClick={taskCompleted}/>
-        <li className="Tasks"    style={{
-          textDecoration: task.completed ? "line-through" : null
-        }}>
+        <input onClick={taskRemoved}/>
+        <ListItem className="Tasks" style={{textDecoration: task.completed ? "line-through" : null}}>
             {task.item}
-        </li>
+        </ListItem>
     </div>
   );
 }
