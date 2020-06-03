@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     },
   });
 
-  export default function Tasks({task, completeTask, removeTask}) {
+  export default function Tasks({task, completeTask, removeTask, searchTyped, searchResults }) {
     const classes = useStyles();
     function taskCompleted () {
         completeTask(task.id)

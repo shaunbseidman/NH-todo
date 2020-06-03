@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     searchForm: {
         width: '50%',
         margin: '0 auto',
+
     },
     searchButton: {
         backgroundColor: APP_COLORS.orchid20,
@@ -15,22 +16,8 @@ const useStyles = makeStyles({
   });
 
 
-export default function TaskForm({addTask}) {
-    const [tasks, setTask] = useState({item: "", id: "", completed: false})
+export default function TaskForm({searchTask}) {
     const classes = useStyles();
-
-    function setTaskId() {
-        const taskArray = []
-        taskArray.push(tasks)
-        taskArray.forEach((item) => {
-            item.id = Math.floor(Math.random() * 100);
-        })
-    }
-
-    function taskTyped(e) {
-        setTask({...tasks, item: e.target.value, id:setTaskId});
-    }
-
     const task = tasks.item
 
     function taskAdded(e) {

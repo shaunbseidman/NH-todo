@@ -40,7 +40,6 @@ export default function SearchForm({addTask}) {
             taskItem.forEach((item) => {
                 item.id = Math.floor(Math.random() * 100);
             })
-            console.log(tasks)
             setTask({...tasks, item: ""})
             addTask({...tasks})
         }
@@ -48,7 +47,15 @@ export default function SearchForm({addTask}) {
 
     return (
         <form className={classes.taskForm} onSubmit={taskAdded}>
-            <TextField variant="outlined" className="task-input" value={task} key={task.id} type="text" name="task" onChange={taskTyped}/>
+            <TextField 
+            variant="outlined"
+            className="task-input"
+            value={task}
+            key={task.id}
+            type="text"
+            name="task"
+            placeholder="Add new task"
+            onChange={taskTyped}/>
             <Button type="submit" className={classes.submitButton}>Submit New Task</Button>
         </form>
     )
