@@ -25,8 +25,16 @@ export default function TaskForm({addTask}) {
     const [tasks, setTask] = useState({item: "", id: "", completed: false})
     const classes = useStyles();
 
+    function setTaskId() {
+        const taskArray = []
+        taskArray.push(tasks)
+        taskArray.forEach((item) => {
+            item.id = Math.floor(Math.random() * 100);
+        })
+    }
+
     function taskTyped(e) {
-        setTask({...tasks, item: e.target.value});
+        setTask({...tasks, item: e.target.value, id:setTaskId});
     }
 
     const task = tasks.item
@@ -36,8 +44,8 @@ export default function TaskForm({addTask}) {
         e.preventDefault();
         if (task) {
             taskItem.push(tasks)
-            taskItem.forEach((item, i) => {
-                item.id = Math.floor(Math.random() * 1000);
+            taskItem.forEach((item) => {
+                item.id = Math.floor(Math.random() * 100);
             })
             setTask({...tasks, item: ""})
             addTask({...tasks})
@@ -46,7 +54,7 @@ export default function TaskForm({addTask}) {
 
     return (
         <form className={classes.taskForm} onSubmit={taskAdded}>
-            <TextField
+            <TextField 
             variant="outlined"
             className="task-input"
             value={task}
