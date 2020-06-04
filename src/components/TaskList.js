@@ -39,7 +39,6 @@ export default function TaskList({tasks, completeTask, removeTask}) {
         type="text"
         className={classes.searchForm}
         variant="outlined"
-        type="text"
         placeholder="Search Your Tasks"
         onChange={e => setSearch(e.target.value)}
       />

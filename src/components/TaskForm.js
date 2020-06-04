@@ -62,7 +62,8 @@ export default function TaskForm({addTask}) {
             type="text"
             name="task"
             placeholder="Add new task"
-            onChange={taskTyped}/>
+            onChange={taskTyped}
+            />
             <Button type="submit" className={classes.submitButton}>Submit New Task</Button>
         </form>
     )
