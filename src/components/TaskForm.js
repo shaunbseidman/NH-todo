@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../styles/TaskForm.scss'
 import { Button, TextField } from "@material-ui/core";
 import {makeStyles} from '@material-ui/core/styles';
 import {APP_COLORS} from './Styles'
@@ -7,14 +6,22 @@ import {APP_COLORS} from './Styles'
 const useStyles = makeStyles({
     taskForm: {
         width: '50%',
-        margin: '0 auto',
+        marginTop: '1rem',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
     },
     submitButton: {
         backgroundColor: APP_COLORS.orchid20,
+        width: '50%',
+        marginTop: '1rem',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
   });
 
-export default function SearchForm({addTask}) {
+export default function TaskForm({addTask}) {
     const [tasks, setTask] = useState({item: "", id: "", completed: false})
     const classes = useStyles();
 
