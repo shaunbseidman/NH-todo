@@ -38,5 +38,7 @@
   },
   "devDependencies": {
     "cypress": "^4.7.0"
-  }
+  },
+  "cypress:all": "cypress run",
+  "cypress": "cypress open"
 }

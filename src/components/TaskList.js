@@ -15,8 +15,8 @@ const useStyles = makeStyles({
     marginRight: 'auto',
   },
   tasks: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
+    display: 'flex',
+    flexDirection: 'column-reverse',
   }
 });
 

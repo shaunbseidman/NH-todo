@@ -5,7 +5,7 @@ describe ('Get input', () => {
     });
   });
 
-  describe('accepts input', () => {
+  describe('Accepts input', () => {
       it('Types in the add task input', () => {
       const text = 'New Todo';
       const inputForm = '.makeStyles-taskForm-10 > .MuiFormControl-root > .MuiInputBase-root > .MuiInputBase-input'
