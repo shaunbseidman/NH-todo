@@ -54,7 +54,7 @@ export default function TaskForm({addTask}) {
 
     return (
         <form className={classes.taskForm} onSubmit={taskAdded}>
-            <TextField 
+            <TextField
             variant="outlined"
             className="task-input"
             value={task}

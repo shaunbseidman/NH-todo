@@ -32,7 +32,7 @@ function App() {
   }, [tasks]);
 
   function addTask(task) {
-    setTask([task, ...tasks])
+    setTask([task, ...tasks]);
   }
 
   function removeTask(id) {
@@ -55,7 +55,7 @@ function App() {
 
   return (
     <div className="App">
-      <Typography 
+      <Typography
         className={classes.header}
         variant="h2">Tasks</Typography>
       <TaskList
