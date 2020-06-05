@@ -20,10 +20,11 @@ const useStyles = makeStyles({
   }
 });
 
-export default function TaskList({tasks, completeTask, removeTask, editTaskName, updateTaskInput}) {
+export default function TaskList({tasks, completeTask, removeTask, editTaskName, blah}) {
   const classes = useStyles();
   const [search, setSearch] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [taskName, setTaskName] = useState("");
 
   useEffect(() => {
     setFilteredTasks(
@@ -43,12 +44,13 @@ export default function TaskList({tasks, completeTask, removeTask, editTaskName,
         onChange={e => setSearch(e.target.value)}
       />
       <div className={classes.tasks}>
-
       {filteredTasks.map(task => (
         <Tasks
           key={task.id}
           task={task}
-          updateTaskInput={updateTaskInput}
+          blah={blah}
+          itemName={taskName}
+          newText={newName => setTaskName(newName)}
           editTaskName={editTaskName}
           removeTask={removeTask}
           completeTask={completeTask} />

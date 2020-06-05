@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {APP_COLORS, APP_FONTS, BREAKPOINTS} from './Styles'
 import {Button, ListItem, Typography, Container, IconButton} from "@material-ui/core";
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from "@material-ui/icons/Close";
 import {makeStyles} from '@material-ui/core/styles';
 import {TextField} from "@material-ui/core";
+import useKeypress from "./Hooks";
+
 
 const useStyles = makeStyles({
     taskContainer: {
@@ -31,14 +33,14 @@ const useStyles = makeStyles({
     },
   });
 
-  export default function Tasks({task, completeTask, removeTask, editTaskName}) {
+  export default function Tasks({task, completeTask, removeTask, newText, itemName, blah}) {
     const classes = useStyles();
-    const [newTaskName, SetNewTaskName] = useState(false)
-    const [fart, setFart] = useState({item: ""})
     const [tasks, setTask] = useState([]);
-    const [taskNames, setTaskName] = useState([])
-    console.log(fart, 'blah')
+    const [isInputActive, setIsInputActive] = useState(false);
+    const [inputValue, setInputValue] = useState([]);
 
+    const enter = useKeypress("Enter");
+    const esc = useKeypress("Escape");
 
     function taskCompleted () {
         completeTask(task.id)
@@ -48,50 +50,19 @@ const useStyles = makeStyles({
         removeTask(task.id)
     }
 
-    function editTask () {
-        editTaskName(task.name)
-    }
-
-    function taskTyped(e) {
-        setFart({...fart, item: e.target.value});
-        console.log(fart.item, 'item')
-    }
-
-    function editTaskName(task) {
-        setTask([task, ...tasks])
-    }
-
-    const taskName = fart.item
-    console.log(tasks)
-
-    function renameOldTask(e) {
-        e.preventDefault();
-        if(taskName) {
-            console.log(taskName)
-            setFart({...fart, item: ""})
-            console.log(addTask)
-            addTask({...fart})
+    useEffect(() => {
+        if (isInputActive) {
+          if (enter) {
+            newText(inputValue);
+            console.log(newText)
+            setIsInputActive(false);
+          }
+          if (esc) {
+            setInputValue(tasks.item);
+            setIsInputActive(false);
+          }
         }
-        console.log('update')
-    }
-
-    function addTask(name) {
-        console.log('jdkfd')
-        console.log(tasks.map(task=> {
-            return task.item
-        }))
-        setFart(
-          tasks.map(task => {
-            const oldTaskName = task.item
-            if(oldTaskName === name) {
-              return {
-                ...fart
-              }
-            }
-            return fart
-          })
-        )
-      }
+      }, [enter, esc]);
 
   return (
       <Container className={classes.taskContainer}>
@@ -108,19 +79,22 @@ const useStyles = makeStyles({
                     <CloseIcon/>
                 </IconButton>
             </div>
-            <Typography
-                className="Tasks"
-                style={{textDecoration: task.completed ? "line-through" : null}}>
-                {task.item}
-            </Typography>
-            <EditIcon onClick={() => {
-                SetNewTaskName(true)
-                }}/>
-              {newTaskName &&
-              <form onSubmit={renameOldTask}>
-                <TextField onClick={editTask} onChange={taskTyped}/>
-                <Button type="submit">Edit Task Name</Button>
-              </form>
+            {!isInputActive &&
+            <div>
+                <Typography
+                    className="Tasks"
+                    style={{textDecoration: task.completed ? "line-through" : null}}>
+                    {itemName}
+                </Typography>
+                <EditIcon onClick={() => setIsInputActive(true)} />
+            </div>
+            }
+              {isInputActive &&
+              <div>
+                <TextField
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}/>
+              </div>
               }
         </ListItem>
       </Container>

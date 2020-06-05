@@ -40,23 +40,10 @@ function App() {
     setTask(tasks.filter(task => task.id !== id));
   }
 
-  function editTaskName(name) {
-    setTaskName(
-      tasks.map(task => {
-        const oldTaskName = task.item
-        if(oldTaskName === name) {
-          return {
-            ...task,
-          }
-        }
-        return task
-      })
-    )
+  function blah() {
+    setTask(tasks.filter(task => task.item));
   }
-
-  function updateTaskInput(e) {
-    setTaskName({...taskNames, item: e.target.value})
-  }
+  console.log(blah)
 
   function completeTask(id) {
     setTask (
@@ -79,9 +66,8 @@ function App() {
         variant="h2">Tasks</Typography>
       <TaskList
         tasks={tasks}
-        editTaskName={editTaskName}
+        blah={blah}
         removeTask={removeTask}
-        updateTaskInput={updateTaskInput}
         completeTask={completeTask }/>
       <TaskForm addTask={addTask} />
     </div>
