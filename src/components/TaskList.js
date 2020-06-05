@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function TaskList({tasks, completeTask, removeTask}) {
+export default function TaskList({tasks, completeTask, removeTask, editTaskName, updateTaskInput}) {
   const classes = useStyles();
   const [search, setSearch] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
@@ -48,6 +48,8 @@ export default function TaskList({tasks, completeTask, removeTask}) {
         <Tasks
           key={task.id}
           task={task}
+          updateTaskInput={updateTaskInput}
+          editTaskName={editTaskName}
           removeTask={removeTask}
           completeTask={completeTask} />
       ))}

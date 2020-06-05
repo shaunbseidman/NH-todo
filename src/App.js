@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
   const [tasks, setTask] = useState([]);
+  const [taskNames, setTaskName] = useState([])
 
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem(localTask))
@@ -37,6 +38,24 @@ function App() {
 
   function removeTask(id) {
     setTask(tasks.filter(task => task.id !== id));
+  }
+
+  function editTaskName(name) {
+    setTaskName(
+      tasks.map(task => {
+        const oldTaskName = task.item
+        if(oldTaskName === name) {
+          return {
+            ...task,
+          }
+        }
+        return task
+      })
+    )
+  }
+
+  function updateTaskInput(e) {
+    setTaskName({...taskNames, item: e.target.value})
   }
 
   function completeTask(id) {
@@ -60,7 +79,9 @@ function App() {
         variant="h2">Tasks</Typography>
       <TaskList
         tasks={tasks}
+        editTaskName={editTaskName}
         removeTask={removeTask}
+        updateTaskInput={updateTaskInput}
         completeTask={completeTask }/>
       <TaskForm addTask={addTask} />
     </div>

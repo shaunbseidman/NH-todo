@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {APP_COLORS, APP_FONTS, BREAKPOINTS} from './Styles'
 import {Button, ListItem, Typography, Container, IconButton} from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from "@material-ui/icons/Close";
 import {makeStyles} from '@material-ui/core/styles';
+import {TextField} from "@material-ui/core";
 
 const useStyles = makeStyles({
     taskContainer: {
@@ -29,8 +31,14 @@ const useStyles = makeStyles({
     },
   });
 
-  export default function Tasks({task, completeTask, removeTask}) {
+  export default function Tasks({task, completeTask, removeTask, editTaskName}) {
     const classes = useStyles();
+    const [newTaskName, SetNewTaskName] = useState(false)
+    const [fart, setFart] = useState({item: ""})
+    const [tasks, setTask] = useState([]);
+    const [taskNames, setTaskName] = useState([])
+    console.log(fart, 'blah')
+
 
     function taskCompleted () {
         completeTask(task.id)
@@ -39,6 +47,51 @@ const useStyles = makeStyles({
     function taskRemoved () {
         removeTask(task.id)
     }
+
+    function editTask () {
+        editTaskName(task.name)
+    }
+
+    function taskTyped(e) {
+        setFart({...fart, item: e.target.value});
+        console.log(fart.item, 'item')
+    }
+
+    function editTaskName(task) {
+        setTask([task, ...tasks])
+    }
+
+    const taskName = fart.item
+    console.log(tasks)
+
+    function renameOldTask(e) {
+        e.preventDefault();
+        if(taskName) {
+            console.log(taskName)
+            setFart({...fart, item: ""})
+            console.log(addTask)
+            addTask({...fart})
+        }
+        console.log('update')
+    }
+
+    function addTask(name) {
+        console.log('jdkfd')
+        console.log(tasks.map(task=> {
+            return task.item
+        }))
+        setFart(
+          tasks.map(task => {
+            const oldTaskName = task.item
+            if(oldTaskName === name) {
+              return {
+                ...fart
+              }
+            }
+            return fart
+          })
+        )
+      }
 
   return (
       <Container className={classes.taskContainer}>
@@ -55,11 +108,20 @@ const useStyles = makeStyles({
                     <CloseIcon/>
                 </IconButton>
             </div>
-            <Typography 
+            <Typography
                 className="Tasks"
                 style={{textDecoration: task.completed ? "line-through" : null}}>
                 {task.item}
             </Typography>
+            <EditIcon onClick={() => {
+                SetNewTaskName(true)
+                }}/>
+              {newTaskName &&
+              <form onSubmit={renameOldTask}>
+                <TextField onClick={editTask} onChange={taskTyped}/>
+                <Button type="submit">Edit Task Name</Button>
+              </form>
+              }
         </ListItem>
       </Container>
   );

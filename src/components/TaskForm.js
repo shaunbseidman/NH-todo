@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   });
 
 export default function TaskForm({addTask}) {
-    const [tasks, setTask] = useState({item: "", id: "", completed: false})
+    const [tasks, setTask] = useState({item: "", id: "", completed: false, edited: false})
     const classes = useStyles();
 
     function setTaskId() {
