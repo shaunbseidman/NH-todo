@@ -7,7 +7,7 @@ describe ('Get input', () => {
 
   describe('Accepts input', () => {
       it('Types in the add task input', () => {
-      const text = 'New Todo';
+      const text = 'New Task';
       const inputForm = '.makeStyles-taskForm-10 > .MuiFormControl-root > .MuiInputBase-root > .MuiInputBase-input'
       cy.visit ('/');
       cy.get('.task-input').type (text)
@@ -26,8 +26,8 @@ describe ('Get input', () => {
   });
 
   describe ('Adds Multiple Tasks', () => {
-    context ('No Todos', () => {
-      it ('Adds a new todo', () => {
+    context ('No Task', () => {
+      it ('Adds a new task', () => {
         cy.visit ('/');
         cy.get ('.task-input').type ('First Task').type ('{enter}');
         cy.get ('.task-input').type ('Second Task').type ('{enter}');
